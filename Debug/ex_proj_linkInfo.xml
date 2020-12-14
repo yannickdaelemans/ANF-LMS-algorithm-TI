@@ -2,7 +2,7 @@
 <link_info>
    <banner>TMS320C55x Linker PC v4.4.1</banner>
    <copyright>Copyright (c) 1996-2012 Texas Instruments Incorporated</copyright>
-   <link_time>0x5fd7a74a</link_time>
+   <link_time>0x5fd7b034</link_time>
    <output_file>ex_proj.out</output_file>
    <entry_point>
       <name>_c_int00</name>

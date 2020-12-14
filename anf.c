@@ -1,7 +1,6 @@
 #include "anf.h"
 
 int old_data = 0;
-int stepize = 1
 
 int anf(int v, int *X, int *A, int *rho, unsigned int* index)
 {
@@ -25,7 +24,7 @@ int anf(int v, int *X, int *A, int *rho, unsigned int* index)
     *rho = ((*A)*(*rho)) + (1-(*A)*(*(rho+1));
     AC0 = v + ((*rho)*(*X)*old_data) - ((*rho)*(*rho)*(k));
     AC1 = AC0 - (old_data*(*X)) + k;
-    e = old_data + (2*AC1*(*X)*stepsize);
+    e = old_data + (2*AC1*(*X)*mu);
     
     old_data = e;
     return e;

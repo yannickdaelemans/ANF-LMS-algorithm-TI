@@ -17,7 +17,7 @@
  *  main( )                                                                 *
  *                                                                          *
  * ------------------------------------------------------------------------ */
-void main( void ) 
+int main( void )
 {
 	int v,e,tmp1;
 	//int index=0 ;
@@ -29,6 +29,8 @@ void main( void )
 	int A[1]={16384};
 	int rho[2]={29491, 29491};//rho=0.9, rho^2
 
+	printf( "\n***Program has Started***\n" );
+
 	fpv = fopen("..\\data\\in.pcm", "rb");
 	fpo = fopen("..\\data\\out.pcm", "wb");
 
@@ -36,8 +38,12 @@ void main( void )
 	    printf("Can't open input file\n");
 	    return ;
 	}
+	if (fpo == NULL){
+	    printf("Can't open output file\n");
+	    return ;
+	}
 
-    tmp1=fread(tempc, sizeof(char), 2, fpv);
+	printf( "1\n" );
     	/*
     	 * tempc = pointer to a block of memory with a minimum size of sizeof(char)*2 bytes.
     	 * each element read is one byte sizeof(char). 2 elements are read out at a time
@@ -47,13 +53,14 @@ void main( void )
     	 */
 
 	//Begin filtering the data
-    while (tmp1 == 2){
+    while (fread(tempc, sizeof(char), 2, fpv) == 2){
+        printf( "In here\n" );
         v = (tempc[0]&0xFF)|(tempc[1]<<8);      // concatenate two bytes into a word
         /*
          * v = data
          * U = data buffer
          * A =  adaptive coeficient
-         * rho = rho?
+         * rho
          * index = points to t-1 sample in U
          */
     	e = anf(v,&U[0],&A[0],&rho[0],&U[0]);  // Adaptive Notch Filter.
@@ -61,8 +68,9 @@ void main( void )
     	tempc[1] = (e>>8)&0xFF;
 
     	fwrite(tempc, sizeof(char), 2, fpo);
-    	tmp1=fread(tempc, sizeof(char), 2, fpv);
     }
+
+    printf( "out while\n" );
 
     	fclose(fpv);
 

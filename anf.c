@@ -8,7 +8,7 @@ int anf(int v, int *X, int *A, int *rho, int* index)
      A in Q14: the adaptive coefficient
      e in Q11: output signal
      rho (fixed) in Q15: rho[2]={rho,rho^2}
-     index points to t-1 sample (t current time index) in X -> circular buffer
+     index points to t-2 sample (t current time index) in X -> circular buffer
      */
     int e,k, rho_sqr, new_X;
     long AC0,AC1;

@@ -31,11 +31,11 @@ int main( void )
 
 	printf( "\n***Program has Started***\n" );
 
-	fpv = fopen("..\\data\\input.txt", "rb");
+	fpv = fopen("..\\data\\in.pcm", "rb");
 	printf( "reading file opening\n" );
 	fpo = fopen("..\\data\\out.pcm", "wb");
 	printf( "writing file opening\n" );
-
+ /*
 	if (fpv == NULL){
 	    printf("Can't open input file\n");
 	    return 0;
@@ -44,10 +44,10 @@ int main( void )
 	    printf("Can't open output file\n");
 	    return 0;
 	}
-
+*/
 	fseek(fpv, 0, SEEK_SET);
 
-	tmp1 = fread(tempc, 1, 1, fpv);
+	tmp1 = fread(tempc, sizeof(char), 2, fpv);
 	if(ferror(fpv)){
 	    //printf ("Error Reading from in.pcm\n");
 	    perror("Error");

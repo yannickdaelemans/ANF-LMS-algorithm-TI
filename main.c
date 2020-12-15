@@ -31,7 +31,7 @@ int main( void )
 
 	printf( "\n***Program has Started***\n" );
 
-	fpv = fopen("..\\data\\in.pcm", "rb");
+	fpv = fopen("..\\data\\input.txt", "rb");
 	printf( "reading file opening\n" );
 	fpo = fopen("..\\data\\out.pcm", "wb");
 	printf( "writing file opening\n" );
@@ -47,7 +47,7 @@ int main( void )
 
 	fseek(fpv, 0, SEEK_SET);
 
-	tmp1 = fread(tempc, sizeof(tempc[0]), 2, fpv);
+	tmp1 = fread(tempc, 1, 1, fpv);
 	if(ferror(fpv)){
 	    //printf ("Error Reading from in.pcm\n");
 	    perror("Error");
@@ -82,7 +82,7 @@ int main( void )
     	tmp1 = fread(tempc, sizeof(char), 2, fpv);
     }
 
-    printf( "out while\n" );
+    printf( "out while now\n" );
 
     fclose(fpv);
     fclose(fpo);

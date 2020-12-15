@@ -20,12 +20,12 @@
 void main( void ) 
 {
 	int v,e,tmp1;
-	unsigned int index=0 ;
+	int index=0 ;
 	FILE  *fpv;
 	FILE  *fpo;
 	char  tempc[2];
 
-	int U[3]={0,0,0};
+	int U[2]={0,0};
 	int A[1]={1};
 	int rho[2]={0.9,0.81};//rho=0.9, rho^2
 
@@ -60,7 +60,6 @@ void main( void )
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
     	// is this right? will this do the correct thing?
-    	U[2] = U[1];
     	U[1] = U[0];
     	U[0] = v;
     	index = U[1];

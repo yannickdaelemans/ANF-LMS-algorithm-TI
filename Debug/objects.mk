@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -l"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/lib/rts55h.lib"
+LIBS := -lrts55h.lib
 

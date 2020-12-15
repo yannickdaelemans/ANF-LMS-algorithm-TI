@@ -6,7 +6,7 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CMD_SRCS += \
-../lnkx.cmd 
+../C5505.cmd 
 
 ASM_SRCS += \
 ../anf.asm 

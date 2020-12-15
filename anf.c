@@ -16,7 +16,7 @@ int anf(int v, int *X, int *A, int *rho, int* index)
     //k = *index;
     AC0= (long) lambda*(*(rho));                //Q30
     AC1 = (long) (32768-lambda)* (*(rho+1));    //Q30
-    AC0+= AC1;                                      //Q30
+    AC0+= AC1;                                  //Q30
     *rho = (int) (AC0>>15);                     //Q15
     AC0 = (long)(*rho)*(*rho);                  //Q30
     rho_sqr= (int) (AC0>>15);                   //Q15;

@@ -20,14 +20,14 @@
 void main( void ) 
 {
 	int v,e,tmp1;
-	int index=0 ;
+	//int index=0 ;
 	FILE  *fpv;
 	FILE  *fpo;
 	char  tempc[2];
 
 	int U[2]={0,0};
-	int A[1]={1};
-	int rho[2]={0.9,0.81};//rho=0.9, rho^2
+	int A[1]={16384};
+	int rho[2]={29491, 29491};//rho=0.9, rho^2
 
 	fpv = fopen("..\\data\\in.pcm", "rb");
 	fpo = fopen("..\\data\\out.pcm", "wb");
@@ -56,14 +56,10 @@ void main( void )
          * rho = rho?
          * index = points to t-1 sample in U
          */
-    	e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter.
+    	e = anf(v,&U[0],&A[0],&rho[0],&U[0]);  // Adaptive Notch Filter.
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
-    	// is this right? will this do the correct thing?
-    	U[1] = U[0];
-    	U[0] = v;
-    	index = U[1];
-    	// ?
+
     	fwrite(tempc, sizeof(char), 2, fpo);
     	tmp1=fread(tempc, sizeof(char), 2, fpv);
     }

@@ -27,7 +27,7 @@ int main( void )
 
 	int U[2]={0,0};
 	int A[1]={16384};
-	int rho[2]={29491, 29491};//rho=0.9, rho^2
+	int rho[2]={29491, 29491};  //rho=0.9, rho^2
 
 	printf( "\n***Program has Started***\n" );
 
@@ -36,14 +36,15 @@ int main( void )
 
 	if (fpv == NULL){
 	    printf("Can't open input file\n");
-	    return ;
+	    return 0;
 	}
 	if (fpo == NULL){
 	    printf("Can't open output file\n");
-	    return ;
+	    return 0;
 	}
 
 	printf( "1\n" );
+
     	/*
     	 * tempc = pointer to a block of memory with a minimum size of sizeof(char)*2 bytes.
     	 * each element read is one byte sizeof(char). 2 elements are read out at a time

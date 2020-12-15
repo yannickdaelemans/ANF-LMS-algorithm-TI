@@ -13,26 +13,26 @@ ASM_SRCS += \
 
 C_SRCS += \
 ../anf.c \
-../mainoffline_anf.c 
+../main.c 
 
 C_DEPS += \
 ./anf.d \
-./mainoffline_anf.d 
+./main.d 
 
 OBJS += \
 ./anf.obj \
-./mainoffline_anf.obj 
+./main.obj 
 
 ASM_DEPS += \
 ./anf.d 
 
 OBJS__QUOTED += \
 "anf.obj" \
-"mainoffline_anf.obj" 
+"main.obj" 
 
 C_DEPS__QUOTED += \
 "anf.d" \
-"mainoffline_anf.d" 
+"main.d" 
 
 ASM_DEPS__QUOTED += \
 "anf.d" 
@@ -42,6 +42,6 @@ ASM_SRCS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../anf.c" \
-"../mainoffline_anf.c" 
+"../main.c" 
 
 

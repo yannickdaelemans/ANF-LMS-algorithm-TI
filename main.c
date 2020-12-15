@@ -32,7 +32,9 @@ int main( void )
 	printf( "\n***Program has Started***\n" );
 
 	fpv = fopen("..\\data\\in.pcm", "rb");
+	printf( "reading file opening\n" );
 	fpo = fopen("..\\data\\out.pcm", "wb");
+	printf( "writing file opening\n" );
 
 	if (fpv == NULL){
 	    printf("Can't open input file\n");
@@ -43,7 +45,15 @@ int main( void )
 	    return 0;
 	}
 
-	printf( "1\n" );
+	fseek(fpv, 0, SEEK_SET);
+
+	tmp1 = fread(tempc, sizeof(tempc[0]), 2, fpv);
+	if(ferror(fpv)){
+	    //printf ("Error Reading from in.pcm\n");
+	    perror("Error");
+	}
+	printf("amount of data read %d\n", tmp1);
+	printf("first data is %d\n", tempc[0]);
 
     	/*
     	 * tempc = pointer to a block of memory with a minimum size of sizeof(char)*2 bytes.
@@ -54,7 +64,7 @@ int main( void )
     	 */
 
 	//Begin filtering the data
-    while (fread(tempc, sizeof(char), 2, fpv) == 2){
+    while (tmp1 == 2){
         printf( "In here\n" );
         v = (tempc[0]&0xFF)|(tempc[1]<<8);      // concatenate two bytes into a word
         /*
@@ -69,13 +79,15 @@ int main( void )
     	tempc[1] = (e>>8)&0xFF;
 
     	fwrite(tempc, sizeof(char), 2, fpo);
+    	tmp1 = fread(tempc, sizeof(char), 2, fpv);
     }
 
     printf( "out while\n" );
 
-    	fclose(fpv);
+    fclose(fpv);
+    fclose(fpo);
 
-    	printf( "\n***Program has Terminated***\n" );
+    printf( "\n***Program has Terminated***\n" );
 }
 
 /*****************************************************************************/

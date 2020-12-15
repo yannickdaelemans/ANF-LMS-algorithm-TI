@@ -11,7 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./anf.obj" \
-"./mainoffline_anf.obj" \
+"./main.obj" \
 "./lib/PLL.obj" \
 "./lib/aic3204.obj" \
 "./lib/aic3204_init.obj" \
@@ -174,8 +174,8 @@ ex_proj.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "anf.obj" "mainoffline_anf.obj" "lib\PLL.obj" "lib\aic3204.obj" "lib\aic3204_init.obj" "lib\bargraph5515.obj" "lib\oled5515.obj" "lib\pushbuttons5515.obj" "lib\stereo.obj" "lib\usbstk5505.obj" "lib\usbstk5505_gpio.obj" "lib\usbstk5505_i2c.obj" "lib\usbstk5505_led.obj" "lib\usbstk5515.obj" "lib\usbstk5515_gpio.obj" "lib\usbstk5515_i2c.obj" "lib\usbstk5515_led.obj" 
-	-$(RM) "anf.d" "mainoffline_anf.d" "lib\PLL.d" "lib\aic3204.d" "lib\aic3204_init.d" "lib\bargraph5515.d" "lib\oled5515.d" "lib\pushbuttons5515.d" "lib\stereo.d" "lib\usbstk5505.d" "lib\usbstk5505_gpio.d" "lib\usbstk5505_i2c.d" "lib\usbstk5505_led.d" "lib\usbstk5515.d" "lib\usbstk5515_gpio.d" "lib\usbstk5515_i2c.d" "lib\usbstk5515_led.d" 
+	-$(RM) "anf.obj" "main.obj" "lib\PLL.obj" "lib\aic3204.obj" "lib\aic3204_init.obj" "lib\bargraph5515.obj" "lib\oled5515.obj" "lib\pushbuttons5515.obj" "lib\stereo.obj" "lib\usbstk5505.obj" "lib\usbstk5505_gpio.obj" "lib\usbstk5505_i2c.obj" "lib\usbstk5505_led.obj" "lib\usbstk5515.obj" "lib\usbstk5515_gpio.obj" "lib\usbstk5515_i2c.obj" "lib\usbstk5515_led.obj" 
+	-$(RM) "anf.d" "main.d" "lib\PLL.d" "lib\aic3204.d" "lib\aic3204_init.d" "lib\bargraph5515.d" "lib\oled5515.d" "lib\pushbuttons5515.d" "lib\stereo.d" "lib\usbstk5505.d" "lib\usbstk5505_gpio.d" "lib\usbstk5505_i2c.d" "lib\usbstk5505_led.d" "lib\usbstk5515.d" "lib\usbstk5515_gpio.d" "lib\usbstk5515_i2c.d" "lib\usbstk5515_led.d" 
 	-$(RM) "anf.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

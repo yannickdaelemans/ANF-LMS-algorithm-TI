@@ -18,12 +18,12 @@ int anf(int v, int *X, int *A, int *rho, int* index)
     AC1 = (long) (32768 - lambda) * (*(rho+1));     //Q30
     AC0+= AC1;                                      //Q30
     *rho = (int) (AC0>>15);                         //Q15
-    AC0 = (long)(*rho) * (*rho);                    //Q30
+    AC0 = (long)(*rho)*(*rho);                      //Q30
     rho_sqr= (int) (AC0>>15);                       //Q15;
 
     AC0 = (long) (*(rho)) * (*(X));                 // AC0 = rho * x(t-1)                   // Q26  Q15*Q11
     AC0 = (long) (*A) * (int)(AC0>>14);             // AC0 = rho * a(t-1) * x(t-1)          //Q26 MSB A(Q14)*AC0(Q12)= Q26
-    AC1 = (long) - ((*A) * (*(X)));                 // AC1 = -a(t-1)*x(t-1)                 // Q25   Q14*Q11=Q25
+    AC1 = (long) -(*A) * (*(X));                    // AC1 = -a(t-1)*x(t-1)                 // Q25   Q14*Q11=Q25
     AC1 += (long) (*(index))<<14;                   // AC1 = -a(t-1)*x(t-1) + x(t-2)        // AC1 (Q25) = AC1(Q25) + (*(X+k))<<14 (Q25)
     long dummy = (long) (rho_sqr) * (*(index));     // dummy = rho_sqr * x(t-2)             //dummy (Q26) = rho(Q15)* (*(X+k)) (Q11)
     AC0 -= dummy;                                   // AC0 = rho*a(t-1)*x(t-1) - rho_sqr*x(t-2) //AC0 (Q26)= AC0(Q26)- dummy(Q26)

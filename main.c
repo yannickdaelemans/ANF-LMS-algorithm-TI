@@ -48,7 +48,7 @@ int main( void )
 	fseek(fpv, 0, SEEK_SET);
 
 	tmp1 = fread(tempc, sizeof(char), 2, fpv);
-	if(ferror(fpv)){
+	if(ferror(fpv)!=0){
 	    //printf ("Error Reading from in.pcm\n");
 	    perror("Error");
 	}
@@ -61,11 +61,11 @@ int main( void )
     	 * (hence tempc[2], this is in total one data object that is read consisting of 2
     	 * elements each a char wide)
     	 * fread returns the total amount of elements read to tmp1 (which should be 2)
-    	 */
+         */
 
 	//Begin filtering the data
     while (tmp1 == 2){
-        printf( "In here\n" );
+        //printf( "In here\n" );
         v = (tempc[0]&0xFF)|(tempc[1]<<8);      // concatenate two bytes into a word
         /*
          * v = data
@@ -74,7 +74,7 @@ int main( void )
          * rho
          * index = points to t-1 sample in U
          */
-    	e = anf(v,&U[0],&A[0],&rho[0],&U[0]);  // Adaptive Notch Filter.
+    	e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter.
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
 
@@ -89,7 +89,6 @@ int main( void )
 
     printf( "\n***Program has Terminated***\n" );
 }
-
 /*****************************************************************************/
 /* End of main.c                                                             */
 /*****************************************************************************/

@@ -3,7 +3,7 @@
 
 static const int mu= 6000; //2*MU
 static const int lambda = 32000;
-int anf(int v, int *U , int *A, int *rho, int* index);
+int anf(int raw_data, int *X_min_1, int *A_min_1, int *rho, int *X_min_2);
 
 #endif
 

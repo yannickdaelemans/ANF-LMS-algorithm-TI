@@ -8,6 +8,9 @@ SHELL = cmd.exe
 CMD_SRCS += \
 ../lnkx.cmd 
 
+ASM_SRCS += \
+../anf.asm 
+
 C_SRCS += \
 ../anf.c \
 ../main.c 
@@ -20,6 +23,9 @@ OBJS += \
 ./anf.obj \
 ./main.obj 
 
+ASM_DEPS += \
+./anf.d 
+
 OBJS__QUOTED += \
 "anf.obj" \
 "main.obj" 
@@ -27,6 +33,12 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "anf.d" \
 "main.d" 
+
+ASM_DEPS__QUOTED += \
+"anf.d" 
+
+ASM_SRCS__QUOTED += \
+"../anf.asm" 
 
 C_SRCS__QUOTED += \
 "../anf.c" \

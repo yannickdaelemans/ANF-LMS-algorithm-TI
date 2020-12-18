@@ -160,7 +160,7 @@ all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 ex_proj.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 --memory_model=huge -O3 -g --define=c5505 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"ex_proj.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/USBSTK5515bsl/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="ex_proj_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "ex_proj.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/bin/cl55" -vcpu:3.3 --memory_model=huge -g --define=c5505 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"ex_proj.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/USBSTK5515bsl/lib" -i"C:/ti/ccs1000/ccs/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="ex_proj_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "ex_proj.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -176,6 +176,7 @@ clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "anf.obj" "main.obj" "lib\PLL.obj" "lib\aic3204.obj" "lib\aic3204_init.obj" "lib\bargraph5515.obj" "lib\oled5515.obj" "lib\pushbuttons5515.obj" "lib\stereo.obj" "lib\usbstk5505.obj" "lib\usbstk5505_gpio.obj" "lib\usbstk5505_i2c.obj" "lib\usbstk5505_led.obj" "lib\usbstk5515.obj" "lib\usbstk5515_gpio.obj" "lib\usbstk5515_i2c.obj" "lib\usbstk5515_led.obj" 
 	-$(RM) "anf.d" "main.d" "lib\PLL.d" "lib\aic3204.d" "lib\aic3204_init.d" "lib\bargraph5515.d" "lib\oled5515.d" "lib\pushbuttons5515.d" "lib\stereo.d" "lib\usbstk5505.d" "lib\usbstk5505_gpio.d" "lib\usbstk5505_i2c.d" "lib\usbstk5505_led.d" "lib\usbstk5515.d" "lib\usbstk5515_gpio.d" "lib\usbstk5515_i2c.d" "lib\usbstk5515_led.d" 
+	-$(RM) "anf.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

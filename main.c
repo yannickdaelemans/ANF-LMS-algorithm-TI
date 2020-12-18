@@ -25,7 +25,7 @@ int main( void )
 	FILE  *fpo;
 	char  tempc[2];
 
-	int U[2]={0,0};
+	int U[3]={0,0,0};
 	int A[1]={16384};
 	int rho[2]={29491, 29491};  //rho=0.9, rho^2
 
@@ -77,6 +77,8 @@ int main( void )
     	e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter.
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
+
+    	printf("data %d", e);
 
     	fwrite(tempc, sizeof(char), 2, fpo);
     	tmp1 = fread(tempc, sizeof(char), 2, fpv);

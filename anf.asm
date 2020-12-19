@@ -59,17 +59,18 @@ _anf:
 		mov		AC3<<#-16, *AR2	:: sqr	 AC3, AC2	; push rho back to address, also already square AC3 for the rho^2
 
 		;CALCULATE rho^2, PUT IN AC2, look also instruction above
-		sfts 	AC2, #1, AC2 :: mpym 	*AR2, 	*AR0+, 	AC0	; shift to Q31 and already calculate X rho*x(t-1) Q15*Q11 = Q26 --> post 1 is added to AR0L
+		sfts 	AC2, #1, AC2 :: mpym 	*AR2, 	*AR0+, 	AC0				; shift to Q31 and already calculate X rho*x(t-1) Q15*Q11 = Q26 --> post 1 is added to AR0L
 
 		;CALCULATE X
 		sfts 	AC0, 	#2, 	AC0	 :: mov		T0, AC3		; extend to Q28 and already push thhe content of T0 (data) is copied to AC0
 		mpym	*AR1, 	AC0, 	AC1			; a*rho*x(t-1)	Q26
 		masm	*AR0+,	AC2,	AC1			; a*rho*x(t-1) - x(t-2)*rho^2 Q26
-		sfts	AC1, 	#-15,	AC1	:: mov		*AR0+,	AC0			; make Q11 and already put x(t) in AC0
+		sfts	AC1, 	#-15,	AC1	:: mov		*AR0+,	AC0		; make Q11
 		add		AC3<<#-4, AC1
 		mov		AC1, 	*AR0 :: mov AR0, *AR3	; move X to buffer, and index back to index again
 
 		;CALCULATE OUTPUT E
+								; put x(t) in AC0
 		mpym 	*AR0+,	*AR1, 	AC1				; x(t-1)*a	Q25
 		sub		AC1<<#-14, 	AC0					; x(t) - x(t-1)*a Q11
 		add 	*AR0+,	AC0						; x(t-2) + x(t) - a*x(t-1) Q11

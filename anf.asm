@@ -65,20 +65,20 @@ _anf:
 
 		;CALCULATE X
 		mpym 	*AR2, 	*AR0+, 	AC0			; rho*x(t-1) Q15*Q11 = Q26 --> post 1 is added to AR0L
-		sfts 	AC0, 		#2, 		AC0			; extend to Q28
-		mpym	*AR1, 	AC0, 		AC0			; a*rho*x(t-1)	Q26
-		masm	*AR0+,	AC2,		AC0			; a*rho*x(t-1) - x(t-2)*rho^2 Q26
-		sfts	AC0, 		#-15,		AC0			; make Q11
-		mov		T0, AC1			 								; The content of T0 is copied to AC0
-		add		AC1<<#-4, AC1
-		mov		AC0, 	*AR0 :: mov AR0, *AR3	; move X to buffer, and index back to index again
+		sfts 	AC0, 	#2, 	AC0			; extend to Q28
+		mpym	*AR1, 	AC0, 	AC1			; a*rho*x(t-1)	Q26
+		masm	*AR0+,	AC2,	AC1			; a*rho*x(t-1) - x(t-2)*rho^2 Q26
+		sfts	AC1, 	#-15,	AC1			; make Q11
+		mov		T0, AC2			 			; The content of T0 is copied to AC0
+		add		AC2<<#-4, AC1
+		mov		AC1, 	*AR0 :: mov AR0, *AR3	; move X to buffer, and index back to index again
 
 		;CALCULATE OUTPUT E
 		mov		*AR0+,	AC0
-		mpym 	*AR0,	*AR1, AC1				; x(t-1)*a	Q25
+		mpym 	*AR0,	*AR1, 	AC1				; x(t-1)*a	Q25
 		sub		AC1<<#-14, 	AC0					; x(t) - x(t-1)*a Q11
-		add 	*-AR0,	AC0							; x(t-2) + x(t) - a*x(t-1) Q11
-		mov 	AC0, T0									; store output back in T0
+		add 	*-AR0,	AC0						; x(t-2) + x(t) - a*x(t-1) Q11
+		mov 	AC0, T0							; store output back in T0
 
 		;CALCULATE A
 		sfts 	AC0, #16, AC0						; make output to LSB

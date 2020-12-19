@@ -20,7 +20,7 @@
 int main( void )
 {
 	int v,e,tmp1;
-	//int index=0 ;
+	int index=0 ;
 	FILE  *fpv;
 	FILE  *fpo;
 	char  tempc[2];
@@ -74,12 +74,16 @@ int main( void )
          * rho
          * index = points to t-1 sample in U
          */
-    	e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter.
+    	e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter.
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
-
-    	printf("data %d", e);
-
+    	/*
+    	printf("input data %d\n", v);
+    	printf("output data %d\n", e);
+    	printf("rho %d\n", rho[0]);
+    	printf("rho^2 %d\n", rho[1]);
+    	printf("x-1 %d\n", U[index]);
+    	*/
     	fwrite(tempc, sizeof(char), 2, fpo);
     	tmp1 = fread(tempc, sizeof(char), 2, fpv);
     }

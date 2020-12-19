@@ -74,7 +74,8 @@ int main( void )
          * rho
          * index = points to t-1 sample in U
          */
-    	e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter.
+        //e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter. for anf.c
+    	e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter. for anf.asm
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
     	/*
@@ -82,7 +83,11 @@ int main( void )
     	printf("output data %d\n", e);
     	printf("rho %d\n", rho[0]);
     	printf("rho^2 %d\n", rho[1]);
-    	printf("x-1 %d\n", U[index]);
+    	printf("A %d\n", A[0]);
+    	printf("x[0] %d\n", U[0]);
+    	printf("x[1] %d\n", U[1]);
+    	printf("x[2] %d\n", U[2]);
+    	printf("\n");
     	*/
     	fwrite(tempc, sizeof(char), 2, fpo);
     	tmp1 = fread(tempc, sizeof(char), 2, fpv);

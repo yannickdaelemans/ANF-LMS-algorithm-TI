@@ -13,8 +13,8 @@
 	 .mmregs
 
 MU .set  500
-LAMBDA .set	32000	;0.763*2^15
-LAMBDA_MIN_ONE .set 768
+LAMBDA .set	32400	;0.763*2^15
+LAMBDA_MIN_ONE .set 368
 
 ; Functions callable from C code
 
@@ -55,7 +55,7 @@ _anf:
 		amov 	LAMBDA, T1;
 		amov	LAMBDA_MIN_ONE, T2
 		mpym	*AR2,	T1,	AC2					; lambda*rho(t-1) -> AC2 Q30
-		macm	*AR2(2), T2, AC2, AC3; (1-lambda)*rho(inf) + lambda*rho(t-1) -> AC2 Q30  make (1)?
+		macm	*AR2(1), T2, AC2, AC3; (1-lambda)*rho(inf) + lambda*rho(t-1) -> AC2 Q30  make (1)?
 		sfts 	AC3, #1, AC3				; shift to Q31
 		mov		AC3<<#-16, *AR2						; push rho back to address
 
@@ -74,21 +74,21 @@ _anf:
 		mov		AC1, 	*AR0 :: mov AR0, *AR3	; move X to buffer, and index back to index again
 
 		;CALCULATE OUTPUT E
-		mov		*AR0+,	AC0
-		mpym 	*AR0,	*AR1, 	AC1				; x(t-1)*a	Q25
+		mov		*AR0+,	AC0						; put x(t) in AC0
+		mpym 	*AR0+,	*AR1, 	AC1				; x(t-1)*a	Q25
 		sub		AC1<<#-14, 	AC0					; x(t) - x(t-1)*a Q11
-		add 	*-AR0,	AC0						; x(t-2) + x(t) - a*x(t-1) Q11
+		add 	*AR0+,	AC0						; x(t-2) + x(t) - a*x(t-1) Q11
 		mov 	AC0, T0							; store output back in T0
 
 		;CALCULATE A
-		sfts 	AC0, #16, AC0						; make output to LSB
-		mpym	*-AR0, AC0, AC1					; x(t-1)*e Q22
-		sfts	AC1, #8, AC1						; Q30
+		sfts 	AC0, #16, AC0					; make output to LSB
+		mpym	*+AR0, AC0, AC1					; x(t-1)*e Q22
+		sfts	AC1, #8, AC1					; Q30
 		amov	MU, T1
-		mpy		T1, AC1, AC1						; 2*mu*x(t-1)*e Q29
-		sfts	AC1, #-15, AC1					; Q14
-		add 	*AR1, AC1, AC1					; a(t-1) + 2*mu*x(t-1)*e
-		mov 	T1, *AR1 								; store a in AR1
+		mpy		T1, AC1, AC0					; 2*mu*x(t-1)*e Q29
+		sfts	AC0, #-15, AC0					; Q14
+		add 	*AR1, AC0, T1					; a(t-1) + 2*mu*x(t-1)*e
+		mov 	T1, *AR1 						; store a in AR1
 
 
 		POP 	mmap(ST2_55)

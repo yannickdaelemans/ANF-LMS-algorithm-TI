@@ -74,8 +74,8 @@ int main( void )
          * rho
          * index = points to t-1 sample in U
          */
-        //e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter. for anf.c
-    	e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter. for anf.asm
+        e = anf(v,&U[0],&A[0],&rho[0],&U[1]);  // Adaptive Notch Filter. for anf.c
+    	//e = anf(v,&U[0],&A[0],&rho[0],&index);  // Adaptive Notch Filter. for anf.asm
     	tempc[0] = (e&0xFF);
     	tempc[1] = (e>>8)&0xFF;
     	/*

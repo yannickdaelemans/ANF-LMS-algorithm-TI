@@ -46,9 +46,9 @@ _anf:
 
 
 		;MAKE CIRCULAR BUFFER X-VALUES
-		mov 	mmap(AR0), 	BSA01		 	; set base address buffer for X
-		mov  	#3, 		BK03 :: bset	AR0LC		; set the size of the buffer to 3 and make AR0 a circular buffer
-		mov 	*AR3, 		AR0				; make the circular buffer start at index
+		mov 	mmap(AR0), 	BSA01 	 	; set base address buffer for X
+		bset	AR0LC :: mov  	#3, 		BK03		; set the size of the buffer to 3 and make AR0 a circular buffer
+		mov 	*AR3, 		AR0		; make the circular buffer start at index
 
 		;CALCULATE rho
 		amov 	LAMBDA, T1
@@ -65,12 +65,12 @@ _anf:
 		sfts 	AC0, 	#2, 	AC0	 :: mov		T0, AC3		; extend to Q28 and already push thhe content of T0 (data) is copied to AC0
 		mpym	*AR1, 	AC0, 	AC1			; a*rho*x(t-1)	Q26
 		masm	*AR0+,	AC2,	AC1			; a*rho*x(t-1) - x(t-2)*rho^2 Q26
-		sfts	AC1, 	#-15,	AC1	:: mov		*AR0+,	AC0		; make Q11
+		sfts	AC1, 	#-15,	AC1			; make Q11
 		add		AC3<<#-4, AC1
 		mov		AC1, 	*AR0 :: mov AR0, *AR3	; move X to buffer, and index back to index again
 
 		;CALCULATE OUTPUT E
-								; put x(t) in AC0
+		mov		*AR0+,	AC0						; put x(t) in AC0
 		mpym 	*AR0+,	*AR1, 	AC1				; x(t-1)*a	Q25
 		sub		AC1<<#-14, 	AC0					; x(t) - x(t-1)*a Q11
 		add 	*AR0+,	AC0						; x(t-2) + x(t) - a*x(t-1) Q11
